@@ -20,6 +20,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'social_id',
+        'social_type',
+        'last_login_time',
+        'last_login_ip',
+        'user_browser',
+        'user_operating_system',
+        'user_location'
     ];
 
     /**
@@ -30,6 +37,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret'
     ];
 
     /**
@@ -40,4 +49,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends=['profile_photo_url'];
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class,'user_id','id')->withDefault();
+    }
+    public function accounts()
+    {
+        return $this->hasMany(SocialAccount::class);
+    }
 }

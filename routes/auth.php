@@ -62,3 +62,42 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+
+
+
+Route::get('/login/{provider}', [AuthenticatedSessionController::class, 'redirect'])
+                ->middleware('guest')
+                ->name('githublogin');
+
+Route::get('/login/{provider}/callback', [AuthenticatedSessionController::class, 'Callback'])
+                ->middleware('guest')
+                ->name('githubcallback');
+
+
+                //github
+/*Route::get('/login/github', [AuthenticatedSessionController::class, 'redirectToGithub'])
+                ->middleware('guest')
+                ->name('githublogin');
+
+Route::get('/login/github/callback', [AuthenticatedSessionController::class, 'githubCallback'])
+                ->middleware('guest')
+                ->name('githubcallback');
+
+                //facebook
+Route::get('/login/facebook', [AuthenticatedSessionController::class, 'redirectToFacebook'])
+                ->middleware('guest')
+                ->name('facebooklogin');
+
+Route::get('/login/facebook/callback', [AuthenticatedSessionController::class, 'facebookCallback'])
+                ->middleware('guest')
+                ->name('facebookcallback');
+
+                //google
+Route::get('/login/google', [AuthenticatedSessionController::class, 'redirectToGoogle'])
+                ->middleware('guest')
+                ->name('googlelogin');
+
+Route::get('/login/google/callback', [AuthenticatedSessionController::class, 'googleCallback'])
+                ->middleware('guest')
+                ->name('googlecallback');*/
+
